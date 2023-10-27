@@ -84,8 +84,8 @@ no3tachibana <-
   ) %>%
   select(!target)
 
-no3brcic <- 
-  brcic[brcic$target != 3, ] %>% 
+no3brcic <-
+  brcic[brcic$target != 3, ] %>%
   mutate(across(intbronch:lymphoidagg, na_if, "NA"),
          across(intbronch:op, factor,
                 levels = c(0, 1, 2, 3),
@@ -96,8 +96,8 @@ no3brcic <-
   ) %>%
   select(!target)
 
-no3fukuoka <- 
-  fukuoka[fukuoka$target != 3, ] %>% 
+no3fukuoka <-
+  fukuoka[fukuoka$target != 3, ] %>%
   mutate(across(intbronch:lymphoidagg, na_if, "NA"),
          across(intbronch:op, factor,
                 ordered = TRUE
@@ -107,8 +107,8 @@ no3fukuoka <-
   ) %>%
   select(!target)
 
-no3consensus3 <- 
-  consensus3[consensus3$target != 3, ] %>% 
+no3consensus3 <-
+  consensus3[consensus3$target != 3, ] %>%
   mutate(across(intbronch:lymphoidagg, na_if, "NA"),
          across(intbronch:op, factor,
                 levels = c(0, 1, 2, 3),
@@ -119,8 +119,8 @@ no3consensus3 <-
   ) %>%
   select(!target)
 
-no3consensus4 <- 
-  consensus4[consensus4$target != 3, ] %>% 
+no3consensus4 <-
+  consensus4[consensus4$target != 3, ] %>%
   mutate(across(intbronch:lymphoidagg, na_if, "NA"),
          across(intbronch:op, factor,
                 levels = c(0, 1, 2, 3),
@@ -257,8 +257,8 @@ ggplot(data = filter(no3sano, !is.na(intbronch)), aes(x = target, fill = intbron
     values = (wesanderson::wes_palette("Darjeeling1")),
     name = "Int. Bronch Grade"
   ) +
-  labs(title = "Rate of Interface Bronchitis by Diagnosis Group", 
-       x = "Diagnosis", 
+  labs(title = "Rate of Interface Bronchitis by Diagnosis Group",
+       x = "Diagnosis",
        y = "Int. Bronch Grade, % of Group") +
   theme_minimal() +
   theme(
@@ -344,10 +344,10 @@ ggplot(
     axis.text.y.left = element_text(vjust = 0.5),
     legend.title = element_text(angle = 90, vjust = 1)
   )
-ggsave("sano_daigVSplasmacellinfilFRACTION.png", 
-       dpi = 320, 
-       height = 15, 
-       width = 15, 
+ggsave("sano_daigVSplasmacellinfilFRACTION.png",
+       dpi = 320,
+       height = 15,
+       width = 15,
        units = "cm")
 
 # plot roc curve
@@ -417,10 +417,10 @@ ggplot(
     axis.text.y.left = element_text(vjust = 0.5),
     legend.title = element_text(angle = 90, vjust = 1)
   )
-ggsave("sano_daigVSeosinoinfilFRACTION.png", 
-       dpi = 320, 
-       height = 15, 
-       width = 15, 
+ggsave("sano_daigVSeosinoinfilFRACTION.png",
+       dpi = 320,
+       height = 15,
+       width = 15,
        units = "cm")
 
 # plot roc curve
@@ -470,8 +470,8 @@ ggplot(
     values = (wesanderson::wes_palette("GrandBudapest2")[2:5]),
     name = "Lymphoid Aggregation Grade"
   ) +
-  labs(title = "Lymphoid Aggregation by Diagnosis Group", 
-       x = "Diagnosis", 
+  labs(title = "Lymphoid Aggregation by Diagnosis Group",
+       x = "Diagnosis",
        y = "Lymphoid Aggregation Grade, % of Group") +
   theme_minimal() +
   theme(
@@ -522,8 +522,8 @@ no3sano %>%
 ggplot(no3sano, aes(target, fill = fibroelastosis)) +
   geom_bar(position = "fill") +
   scale_fill_brewer("Fibroelastosis", palette = "Accent") +
-  labs(x = "Diagnosis", 
-       y = "Fraction of Diagnosis Group", 
+  labs(x = "Diagnosis",
+       y = "Fraction of Diagnosis Group",
        title = "Fibroelastosis by Diagnosis Group") +
   theme(
     text = element_text(family = "Arial"),
@@ -534,10 +534,10 @@ ggplot(no3sano, aes(target, fill = fibroelastosis)) +
     ),
     legend.background = element_rect(colour = "black", linewidth = 0.3)
   )
-ggsave("sano_diagVSfibroFRACTION.png", 
-       dpi = 320, 
-       height = 12, 
-       width = 12, 
+ggsave("sano_diagVSfibroFRACTION.png",
+       dpi = 320,
+       height = 12,
+       width = 12,
        units = "cm")
 
 # plot roc curve
@@ -585,8 +585,8 @@ ggplot(no3sano, aes(target, fill = op)) +
     values = (wesanderson::wes_palette("Zissou1"))[2:5],
     name = "OP Grade"
   ) +
-  labs(title = "Rate of OP by Diagnosis Group", 
-       x = "Diagnosis", 
+  labs(title = "Rate of OP by Diagnosis Group",
+       x = "Diagnosis",
        y = "OP Grade % of Group") +
   theme_minimal() +
   theme(
@@ -602,10 +602,10 @@ ggplot(no3sano, aes(target, fill = op)) +
     panel.grid.major.x = element_blank(),
     axis.text.y.left = element_text(vjust = 0.5)
   )
-ggsave("sano_daigVSopFRACTION.png", 
-       dpi = 320, 
-       height = 15, 
-       width = 15, 
+ggsave("sano_daigVSopFRACTION.png",
+       dpi = 320,
+       height = 15,
+       width = 15,
        units = "cm")
 
 # plot roc curve
@@ -907,11 +907,11 @@ tbl_merge(
       separate_p_footnotes() %>%
       modify_header(label = "**Factor**")
   ),
-  tab_spanner = c("**Dr. Sano**", 
-                  "**Dr. Tachibana**", 
-                  "**Dr. Brcic**", 
-                  "**Dr.Fukuoka**", 
-                  "**3-Way Consensus**", 
+  tab_spanner = c("**Pathologist 1**",
+                  "**Pathologist 2**",
+                  "**Pathologist 3**",
+                  "**Pathologist 4**",
+                  "**3-Way Consensus**",
                   "**4-Way Consensus**")
 ) %>%
   # as_flex_table() %>% # use this section if you want to save as .docx
@@ -921,13 +921,13 @@ tbl_merge(
   #                                                          height = 20,
   #                                                          orient = "portrait")
   #                         ))
-  as_gt() %>% # uncomment this section if you want to save as .png 
-  tab_header(title = md("**Histological Scoring by Pathologist**")) %>% 
+  as_gt() %>% # uncomment this section if you want to save as .png
+  tab_header(title = md("**Histological Scoring by Pathologist**")) %>%
   tab_options(
     data_row.padding = 3,
     data_row.padding.horizontal = 0,
     heading.title.font.size = 36,
-    heading.padding = 10) %>% 
+    heading.padding = 10) %>%
   gtsave("ts_stats_merged_table_tall.png",
     zoom = 5,
     vheight = 5000,
@@ -980,7 +980,7 @@ t2 <- no3tachibana %>%
 
 t3 <- tbl_stack(
   tbls = list(t1, t2),
-  group_header = c("Dr. Sano", "Dr. Tachibana")
+  group_header = c("Pathologist 1", "Pathologist 2")
 ) %>%
   as_gt()
 
@@ -1008,9 +1008,9 @@ gt::gtsave(t3, "ts_stats_merged_table_wide.png",
 kappamatrix <-
   left_join(no3tachibana, no3sano, by = "ID", suffix = c(".t", ".s"), keep = FALSE) %>%
   left_join(no3brcic, by = "ID", keep = FALSE) %>%
-  rename_with(~ paste0(.x,".b"), intbronch:op) %>% 
+  rename_with(~ paste0(.x,".b"), intbronch:op) %>%
   left_join(no3fukuoka, by = "ID", keep = FALSE) %>%
-  rename_with(~ paste0(.x,".f"), intbronch:op) %>% 
+  rename_with(~ paste0(.x,".f"), intbronch:op) %>%
   select(where(is.ordered)) %>%
   mutate(
     target = NULL,
@@ -1032,7 +1032,7 @@ pairlist <- list(
 )
 
 # creates the tibble of results from the kappa calculation of each pair for each finding
-cohenkapparesults <- 
+cohenkapparesults <-
   tribble(~finding,
           "intbronch",
           "plasmacellinfil",
@@ -1043,33 +1043,33 @@ cohenkapparesults <-
   mutate(kappa =
            {map(.$finding, \(finding)
                 kappamatrix %>%
-                  select(starts_with(finding)) %>% 
-                  {map(pairlist, \(pair) select(., ends_with(pair)))} %>% 
+                  select(starts_with(finding)) %>%
+                  {map(pairlist, \(pair) select(., ends_with(pair)))} %>%
                   {map(., kappa2, "squared")}
            )}
-  ) %>% 
-  unnest_longer(col = kappa) %>% 
+  ) %>%
+  unnest_longer(col = kappa) %>%
   mutate(value =
            {
              map(.$kappa, \(row)
                  row[[5]])
-           }) %>% 
+           }) %>%
   mutate(`p-value` =
            {
              map(.$kappa, \(row)
                  row[[8]])
-           }) %>% 
-  rowwise() %>% 
+           }) %>%
+  rowwise() %>%
   mutate(value = round(value, digits = 3),
          `p-value` = case_when(`p-value`!=0 ~ format(`p-value`, scientific = TRUE, digits = 3))
   ) %>%
   select(!kappa) %>%
-  bind_cols(rep(c("S-T",
-                  "S-B",
-                  "S-F",
-                  "T-B",
-                  "T-F",
-                  "B-F"), 6)) %>%
+  bind_cols(rep(c("1-2",
+                  "1-3",
+                  "1-4",
+                  "2-3",
+                  "2-4",
+                  "3-4"), 6)) %>%
   rename(pair = `...4`)
 
 # create a gt
@@ -1077,60 +1077,60 @@ cohenkapparesults %>%
   # pivot_wider(names_from = finding, # this commented out block was from when the findings were the col spanners
   #             values_from = c(value, p),
   #             names_glue = "{finding}_{.value}",
-  #             ) %>% 
-  # relocate(intbronch_p, .after = intbronch_value) %>% 
-  # relocate(plasmacellinfil_p, .after = plasmacellinfil_value) %>% 
-  # relocate(eosinoinfil_p, .after = eosinoinfil_value) %>% 
-  # relocate(lymphoidagg_p, .after = lymphoidagg_value) %>% 
-  # relocate(fibroelastosis_p, .after = fibroelastosis_value) %>% 
-  # relocate(op_p, .after = op_value) %>% 
+  #             ) %>%
+  # relocate(intbronch_p, .after = intbronch_value) %>%
+  # relocate(plasmacellinfil_p, .after = plasmacellinfil_value) %>%
+  # relocate(eosinoinfil_p, .after = eosinoinfil_value) %>%
+  # relocate(lymphoidagg_p, .after = lymphoidagg_value) %>%
+  # relocate(fibroelastosis_p, .after = fibroelastosis_value) %>%
+  # relocate(op_p, .after = op_value) %>%
   pivot_wider(names_from = pair,
               values_from = c(value, `p-value`),
-              names_glue = "{pair}_{.value}") %>% 
-  select(order(colnames(.), decreasing = TRUE)) %>% 
-  group_by(finding) %>% 
-  gt(row_group_as_column = TRUE) %>% 
-  tab_spanner_delim(delim = "_") %>% 
+              names_glue = "{pair}_{.value}") %>%
+  select(order(colnames(.), decreasing = TRUE)) %>%
+  group_by(finding) %>%
+  gt(row_group_as_column = TRUE) %>%
+  tab_spanner_delim(delim = "_") %>%
   text_replace(locations = cells_row_groups(),
                pattern = "intbronch",
-               replacement = "Interface Bronchitis") %>% 
+               replacement = "Interface Bronchitis") %>%
   text_replace(locations = cells_row_groups(),
                pattern = "plasmacellinfil",
-               replacement = "Plasma Cell Infiltration") %>% 
+               replacement = "Plasma Cell Infiltration") %>%
   text_replace(locations = cells_row_groups(),
                pattern = "eosinoinfil",
-               replacement = "Eosinofil Infiltration") %>% 
+               replacement = "Eosinofil Infiltration") %>%
   text_replace(locations = cells_row_groups(),
                pattern = "lymphoidagg",
-               replacement = "Lymphoid Aggregation") %>% 
+               replacement = "Lymphoid Aggregation") %>%
   text_replace(locations = cells_row_groups(),
                pattern = "fibroelastosis",
-               replacement = "Fibroelastosis") %>% 
+               replacement = "Fibroelastosis") %>%
   text_replace(locations = cells_row_groups(),
                pattern = "op",
-               replacement = "OP") %>% 
+               replacement = "OP") %>%
   text_replace(locations = cells_body(),
                pattern = "0e+00",
-               replacement = "0") %>% 
-  sub_missing(missing_text = "<1e-20") %>% 
+               replacement = "0") %>%
+  sub_missing(missing_text = "<1e-20") %>%
   tab_style(cell_text(align = "center"),
-            locations = cells_column_labels()) %>% 
-  tab_options(data_row.padding.horizontal = 10) %>% 
+            locations = cells_column_labels()) %>%
+  tab_options(data_row.padding.horizontal = 10) %>%
   tab_style(style = cell_text(weight = "bold"),
-            locations = cells_column_spanners()) %>% 
+            locations = cells_column_spanners()) %>%
   tab_style(style = cell_text(weight = "bold"),
-            locations = cells_column_labels()) %>% 
+            locations = cells_column_labels()) %>%
   tab_style(style =cell_text(align = "right"),
-            locations = cells_body()) %>% 
-  tab_header(title = "Weighted Kappa Values Between Each Pathologist Pair") %>% 
+            locations = cells_body()) %>%
+  tab_header(title = "Weighted Kappa Values Between Each Pathologist Pair") %>%
   tab_options(heading.padding = 15,
-              source_notes.padding = 5) %>% 
-  tab_source_note(source_note = "<0, no agreement; 0-0.20, 
-                  slight agreement; 0.21-0.40, 
-                  fair agreement; 0.41-0.60, 
-                  moderate agreement; 0.61-0.80, 
-                  substantial agreement; 0.81-1.0, 
-                  nearly perfect agreement") %>% 
+              source_notes.padding = 5) %>%
+  tab_source_note(source_note = "<0, no agreement; 0-0.20,
+                  slight agreement; 0.21-0.40,
+                  fair agreement; 0.41-0.60,
+                  moderate agreement; 0.61-0.80,
+                  substantial agreement; 0.81-1.0,
+                  nearly perfect agreement") %>%
   gtsave("kappatable.png",
          zoom = 10,
          delay = 0.5,
@@ -1138,7 +1138,7 @@ cohenkapparesults %>%
          expand = 10)
 
 # this is experimenting with the vcd::Kappa function as opposed to the irr:kappa2 function
-# cohenkapparesults2 <- 
+# cohenkapparesults2 <-
 #   tribble(~finding,
 #           "intbronch",
 #           "plasmacellinfil",
@@ -1149,13 +1149,13 @@ cohenkapparesults %>%
 #   mutate(kappa =
 #            {map(.$finding, \(finding)
 #                 kappamatrix %>%
-#                   select(starts_with(finding)) %>% 
-#                   {map(pairlist, \(pair) select(., ends_with(pair)))} %>% 
+#                   select(starts_with(finding)) %>%
+#                   {map(pairlist, \(pair) select(., ends_with(pair)))} %>%
 #                   {map(., table)} %>%
 #                   {map(., vcd::Kappa)} %>%
 #                   {map(., print)}
 #            )}
-#   )         
+#   )
 
 ## fukuoka ROC analysis ----------------------
 
@@ -1174,18 +1174,18 @@ AUC_analysis <- function(dat) {
     "OP" = roc(dat$maligvsbenign, dat$op,
                direction = ">")
   )
-  
-  auc_list <- 
-    map(roc_list, \(x) auc(x)) %>% 
-    tibble("name" = .) %>% 
-    mutate(auc = paste0(round(as.numeric(name), digits = 3))) %>% 
+
+  auc_list <-
+    map(roc_list, \(x) auc(x)) %>%
+    tibble("name" = .) %>%
+    mutate(auc = paste0(round(as.numeric(name), digits = 3))) %>%
     mutate(name = c("Intbronch",
                     "Plasma Cell Infil",
                     "Eosinophil Infil",
                     "Lymphoid Agg",
                     "Fibroelastosis",
                     "OP"))
-  
+
   ggroc(roc_list,
         show.legend = FALSE) +
     facet_wrap(~name) +
