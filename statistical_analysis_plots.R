@@ -138,27 +138,6 @@ get_expected_values <- function(data, variable, by) {
 ## End Header --------------
 
 
-## Bronchial Epithelial Cells USELESS ----------------------------------------------
-
-CPCOLS <- c("#FF5784", "#05EBC8")
-
-ggplot(no3sano, aes(bronch_epithelialcells, fill = bronch_epithelialcells)) +
-  geom_bar(stat = "count", show.legend = F) +
-  scale_x_discrete(labels = c("Absent", "Present")) +
-  scale_fill_manual(values = CPCOLS, ) +
-  labs(x = "Bronchial Epithelium", y = "Count") +
-  geom_text(
-    aes(label = after_stat(count)),
-    stat = "count",
-    position = "identity",
-    vjust = 1.3,
-    size = 5,
-    color = "white",
-    fontface = "bold"
-  ) +
-  ggpubr::theme_classic2()
-ggsave("sano_bronchEpcount.png", dpi = 320, width = 12, height = 12, units = "cm")
-
 ## Age -------------------------------------------
 ggplot(data = no3sano) +
   geom_dotplot(
@@ -1283,3 +1262,54 @@ ggsave("consensus4_auc.png",
        dpi = 320,
        height = 6,
        width = 8)
+## fig. 4 AUC curves ------------------
+
+AUC_analysis <- function(dat) {
+  roc_list <- list(
+    "Intbronch" = roc(dat$maligvsbenign, dat$intbronch,
+                      direction = ">"),
+    "Plasma Cell Infil" = roc(dat$maligvsbenign, dat$plasmacellinfil,
+                              direction = ">"),
+    "Eosinophil Infil" = roc(dat$maligvsbenign, dat$eosinoinfil,
+                             direction = ">"),
+    "Lymphoid Agg" = roc(dat$maligvsbenign, dat$lymphoidagg,
+                         direction = ">"),
+    "Fibroelastosis" = roc(dat$maligvsbenign, dat$fibroelastosis,
+                           direction = "<"),
+    "OP" = roc(dat$maligvsbenign, dat$op,
+               direction = ">")
+  )
+  
+  auc_list <- 
+    map(roc_list, \(x) auc(x)) %>% 
+    tibble("name" = .) %>% 
+    mutate(auc = paste0(round(as.numeric(name), digits = 3))) %>% 
+    mutate(name = c("Intbronch",
+                    "Plasma Cell Infil",
+                    "Eosinophil Infil",
+                    "Lymphoid Agg",
+                    "Fibroelastosis",
+                    "OP"))
+  
+  ggroc(roc_list,
+        show.legend = FALSE) +
+    facet_wrap(~name) +
+    theme_minimal() +
+    geom_abline(slope = 1,
+                intercept = 1) +
+    geom_text(data = auc_list,
+              aes(
+                label = paste0("AUC = ",auc),
+                0,0,
+                vjust = 0,
+                hjust = 1
+              ),
+              show.legend = FALSE) +
+    labs(caption = "Figure 4. Receiver Operating Curve of the Scored Histological Features") +
+    theme(plot.caption = element_text(size = 12, hjust = 0))
+}
+AUC_analysis(no3fukuoka)
+ggsave("fig4.png",
+       dpi = 320,
+       width = 8,
+       height = 6)
