@@ -240,6 +240,15 @@ ggsave("suppfig1.jpeg", dpi = 1000, height = 12, width = 12, units = "cm")
 ## Supplemental table 1 classifier comparison -------------
 classifier_compare_metrics <- read_csv("~/Sano_TBLB/classifier_compare_metrics.csv")
 classifier_compare_metrics %>% 
+  rename(
+    "Algorithm" = `0`,
+    "Accuracy" = `1`,
+    "AUC" = `2`,
+    "F1" = `3`,
+    "Precision" = `4`,
+    "Recall" = `5`,
+    "Time" = `6`,
+  ) %>% 
   group_by(Algorithm) %>% 
   summarise(across(everything(), mean)) %>% 
   gt() %>% 
