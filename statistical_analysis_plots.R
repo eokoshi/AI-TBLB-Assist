@@ -41,7 +41,7 @@ library(corrplot)
 #
 ## load data -------------
 #
-input_data_path <- "~/ethancoding/Sano/sanoproject_ENO.xlsx"
+input_data_path <- "~/projects/Sano/sanoproject_ENO.xlsx"
 library(readxl)
 data <- read_excel(input_data_path, sheet = "fukuoka")
 
