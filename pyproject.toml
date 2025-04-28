@@ -14,5 +14,6 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ipython>=8.35.0",
-    "marimo>=0.13.0",
+    "jupytext>=1.17.1",
+    "notebook>=7.4.1",
 ]
